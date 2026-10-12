@@ -45,7 +45,6 @@
       (_, i) => `BB${String(i + 1).padStart(3, "0")}`
     );
 
-
     const params = new URLSearchParams(window.location.search);
     const cod = (params.get("ticket") || "").trim().toUpperCase();
 
