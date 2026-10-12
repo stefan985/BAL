@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verificare bilete - Balul Bobocilor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      padding: 35px 25px;
+      border-radius: 20px;
+      text-align: center;
+      width: 85%;
+      max-width: 400px;
+      box-shadow: 0 4px 20px #0002;
+    }
+    h1 { font-size: 25px; }
+    #status { font-size: 30px; font-weight: bold; }
+    .valid { color: #16803c; }
+    .invalid { color: #c62828; }
+    #number { color: #555; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>🎟️ Balul Bobocilor</h1>
+    <p id="number"></p>
+    <div id="status">Se verifică...</div>
+  </main>
+
+  <script>
+    // Înlocuiește aceste exemple cu numerele biletelor tale.
+    const bileteValide = [
+      "BB001",
+      "BB002",
+      "BB003"
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const cod = (params.get("ticket") || "").trim().toUpperCase();
+
+    document.getElementById("number").textContent =
+      cod ? "Bilet: " + cod : "Nu a fost furnizat un cod.";
+
+    const status = document.getElementById("status");
+
+    if (cod && bileteValide.includes(cod)) {
+      status.textContent = "BILET VALID";
+      status.className = "valid";
+    } else {
+      status.textContent = "BILET INVALID";
+      status.className = "invalid";
+    }
+  </script>
+</body>
+</html>
