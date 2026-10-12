@@ -1,0 +1,2 @@
+# BAL
+Validare bilete bal
