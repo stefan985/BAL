@@ -1,12 +1,10 @@
 
-
 <!DOCTYPE html>
 <html lang="ro">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Verificare bilete - Balul Bobocilor</title>
-
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -28,30 +26,13 @@
       box-shadow: 0 4px 20px #0002;
     }
 
-    h1 {
-      font-size: 25px;
-    }
-
-    #status {
-      font-size: 30px;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-
-    .valid {
-      color: #16803c;
-    }
-
-    .invalid {
-      color: #c62828;
-    }
-
-    #number {
-      color: #555;
-    }
+    h1 { font-size: 25px; }
+    #status { font-size: 30px; font-weight: bold; margin-top: 20px; }
+    .valid { color: #16803c; }
+    .invalid { color: #c62828; }
+    #number { color: #555; }
   </style>
 </head>
-
 <body>
   <main class="card">
     <h1>🎟️ Balul Bobocilor</h1>
@@ -60,32 +41,33 @@
   </main>
 
   <script>
-    // Generează automat biletele BB001 - BB300
-    const bileteValide = Array.from(
-      { length: 300 },
-      (_, i) => "BB" + String(i + 1).padStart(3, "0")
-    );
+    (() => {
+      const bileteValide = Array.from(
+        { length: 300 },
+        (_, i) => "BB" + String(i + 1).padStart(3, "0")
+      );
 
-    // Citește codul biletului din adresa paginii
-    const params = new URLSearchParams(window.location.search);
-    const cod = (params.get("ticket") || "").trim().toUpperCase();
+      const params = new URLSearchParams(window.location.search);
+      const cod = (params.get("ticket") || "").trim().toUpperCase();
 
-    const number = document.getElementById("number");
-    const status = document.getElementById("status");
+      const number = document.getElementById("number");
+      const status = document.getElementById("status");
 
-    number.textContent = cod
-      ? "Bilet: " + cod
-      : "Nu a fost furnizat un cod.";
+      number.textContent = cod
+        ? "Bilet: " + cod
+        : "Nu a fost furnizat un cod.";
 
-    // Verifică biletul
-    if (bileteValide.includes(cod)) {
-      status.textContent = "BILET VALID";
-      status.className = "valid";
-    } else {
-      status.textContent = "BILET INVALID";
-      status.className = "invalid";
-    }
+      if (cod && bileteValide.includes(cod)) {
+        status.textContent = "BILET VALID";
+        status.className = "valid";
+      } else {
+        status.textContent = "BILET INVALID";
+        status.className = "invalid";
+      }
+    })();
   </script>
 </body>
 </html>
+
+
 
