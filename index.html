@@ -1,10 +1,12 @@
 
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Verificare bilete - Balul Bobocilor</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -15,6 +17,7 @@
       min-height: 100vh;
       margin: 0;
     }
+
     .card {
       background: white;
       padding: 35px 25px;
@@ -24,13 +27,31 @@
       max-width: 400px;
       box-shadow: 0 4px 20px #0002;
     }
-    h1 { font-size: 25px; }
-    #status { font-size: 30px; font-weight: bold; }
-    .valid { color: #16803c; }
-    .invalid { color: #c62828; }
-    #number { color: #555; }
+
+    h1 {
+      font-size: 25px;
+    }
+
+    #status {
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .valid {
+      color: #16803c;
+    }
+
+    .invalid {
+      color: #c62828;
+    }
+
+    #number {
+      color: #555;
+    }
   </style>
 </head>
+
 <body>
   <main class="card">
     <h1>🎟️ Balul Bobocilor</h1>
@@ -38,22 +59,26 @@
     <div id="status">Se verifică...</div>
   </main>
 
- <script>
-    // Generează automat cele 300 de bilete.
+  <script>
+    // Generează automat biletele BB001 - BB300
     const bileteValide = Array.from(
       { length: 300 },
-      (_, i) => `BB${String(i + 1).padStart(3, "0")}`
+      (_, i) => "BB" + String(i + 1).padStart(3, "0")
     );
 
+    // Citește codul biletului din adresa paginii
     const params = new URLSearchParams(window.location.search);
     const cod = (params.get("ticket") || "").trim().toUpperCase();
 
-    document.getElementById("number").textContent =
-      cod ? "Bilet: " + cod : "Nu a fost furnizat un cod.";
-
+    const number = document.getElementById("number");
     const status = document.getElementById("status");
 
-    if (cod && bileteValide.includes(cod)) {
+    number.textContent = cod
+      ? "Bilet: " + cod
+      : "Nu a fost furnizat un cod.";
+
+    // Verifică biletul
+    if (bileteValide.includes(cod)) {
       status.textContent = "BILET VALID";
       status.className = "valid";
     } else {
@@ -63,3 +88,4 @@
   </script>
 </body>
 </html>
+
