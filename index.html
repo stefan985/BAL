@@ -38,13 +38,13 @@
     <div id="status">Se verifică...</div>
   </main>
 
-  <script>
-    // Înlocuiește aceste exemple cu numerele biletelor tale.
-    const bileteValide = [
-      "BB001",
-      "BB002",
-      "BB003"
-    ];
+ <script>
+    // Generează automat cele 300 de bilete.
+    const bileteValide = Array.from(
+      { length: 300 },
+      (_, i) => `BB${String(i + 1).padStart(3, "0")}`
+    );
+</script>
 
     const params = new URLSearchParams(window.location.search);
     const cod = (params.get("ticket") || "").trim().toUpperCase();
